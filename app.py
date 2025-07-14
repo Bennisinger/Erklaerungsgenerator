@@ -16,10 +16,12 @@ begriff = st.text_input("🔤 Begriff eingeben:")
 if st.button("Erklären"):
     if begriff:
         with st.spinner("Denke nach..."):
-            prompt = f"""Gib mir zwei kurze Erklärungen zum Begriff '{begriff}':
-1. Eine sachliche, technische Definition in einem Satz (ohne Beispiele).
-2. Eine bildhafte, gerne unterhaltsame und kreative Metapher oder einen Vergleich aus dem Alltag, der den Begriff für Laien verständlich macht. Die Erklärung darf 2–4 Sätze lang sein, anschaulich und mit einem Augenzwinkern geschrieben – aber ohne Fachbegriffe.
-Antworte klar getrennt mit 'Technische Definition:' und 'Alltagsvergleich:'.
+            prompt = f"""Erkläre den Begriff '{begriff}' in genau zwei Abschnitten:
+
+1. Technische Definition: Eine sachliche, technische Definition in einem Satz (ohne Beispiele).
+2. Alltagsmetapher: Erkläre den Begriff mit einer bildhaften, gerne auch etwas ausführlicheren Metapher oder einem Vergleich aus dem Alltag. Schreibe eine kleine, verständliche Alltagsgeschichte, die den Begriff leicht greifbar macht. Nutze dabei keine Fachbegriffe, sondern anschauliche und emotionale Sprache.
+
+Antworte genau in diesem Format und beginne den zweiten Abschnitt nach 'Alltagsmetapher:' in einer neuen Zeile.
 """
 
             response = client.chat.completions.create(
@@ -31,8 +33,21 @@ Antworte klar getrennt mit 'Technische Definition:' und 'Alltagsvergleich:'.
             )
 
             antwort = response.choices[0].message.content
-            st.markdown("### 🧑‍💻 Technische Definition & Alltagsvergleich:")
-            st.write(antwort)
+
+            # Aufteilung und Darstellung in zwei Spalten:
+            teile = antwort.split("Alltagsmetapher:")
+            if len(teile) == 2:
+                technische_definition = teile[0].replace("Technische Definition:", "").replace("1.", "").strip()
+                alltagsmetapher = teile[1].strip()
+                
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.markdown("### 💡 Technische Definition")
+                    st.info(technische_definition)
+                with col2:
+                    st.markdown("### 🌈 Alltagsmetapher")
+                    st.success(alltagsmetapher)
+            else:
+                st.write(antwort)
     else:
         st.warning("Bitte gib einen Begriff ein.")
-
