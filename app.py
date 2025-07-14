@@ -3,23 +3,24 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 
-# API-Key aus .env laden
+# API-Key aus .env laden (lokal)
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# App-Layout
 st.set_page_config(page_title="Erklärungsgenerator", page_icon="📘")
-st.title("🔍 Erklärungsgenerator für Tech-Begriffe")
-st.write("Gib einen technischen Begriff ein, und ich erkläre ihn dir einfach, bildhaft und verständlich.")
+st.title("🧠 Zwei Perspektiven auf Tech-Begriffe")
+st.write("Gib einen Tech-Begriff ein und bekomme eine technische Definition sowie einen bildhaften, kreativen Vergleich.")
 
-# Eingabefeld
 begriff = st.text_input("🔤 Begriff eingeben:")
 
-# Wenn Button gedrückt wird
 if st.button("Erklären"):
     if begriff:
         with st.spinner("Denke nach..."):
-            prompt = f"Erkläre den Begriff '{begriff}' so, dass ihn ein neugieriger Mensch ohne Technik-Vorkenntnisse versteht. Nutze eine einfache, bildhafte Metapher und ein kurzes Beispiel aus dem Alltag. Die Erklärung soll so verständlich sein, dass sie im Kopf bleibt – wie eine gute Geschichte."
+            prompt = f"""Gib mir zwei kurze Erklärungen zum Begriff '{begriff}':
+1. Eine sachliche, technische Definition in einem Satz (ohne Beispiele).
+2. Eine bildhafte, gerne unterhaltsame und kreative Metapher oder einen Vergleich aus dem Alltag, der den Begriff für Laien verständlich macht. Die Erklärung darf 2–4 Sätze lang sein, anschaulich und mit einem Augenzwinkern geschrieben – aber ohne Fachbegriffe.
+Antworte klar getrennt mit 'Technische Definition:' und 'Alltagsvergleich:'.
+"""
 
             response = client.chat.completions.create(
                 model="gpt-3.5-turbo",
@@ -30,7 +31,8 @@ if st.button("Erklären"):
             )
 
             antwort = response.choices[0].message.content
-            st.markdown("### 🧠 Erklärung:")
+            st.markdown("### 🧑‍💻 Technische Definition & Alltagsvergleich:")
             st.write(antwort)
     else:
         st.warning("Bitte gib einen Begriff ein.")
+
