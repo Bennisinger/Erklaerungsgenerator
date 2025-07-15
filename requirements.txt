@@ -1,4 +1,4 @@
 streamlit
 openai
-wikipedia-api==0.6.0
+wikipedia
 python-dotenv
