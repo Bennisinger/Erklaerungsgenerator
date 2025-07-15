@@ -27,29 +27,36 @@ st.markdown(
             color: {DARK};
             font-size: 1.15em;
             margin-top: -8px;
-            margin-bottom: 18px;
+            margin-bottom: 8px;
             font-weight: 400;
+        }}
+        .subtitle-2 {{
+            color: {DARK};
+            font-size: 1.01em;
+            font-weight: 400;
+            margin-bottom: 22px;
         }}
         .subfield {{
             color: {DARK};
-            font-size: 1.08em;
+            font-size: 0.95em;
             font-weight: 400;
-            margin-top: 10px;
-            margin-bottom: 8px;
-            letter-spacing: 0.02em;
+            margin-top: 5px;
+            margin-bottom: 4px;
+            letter-spacing: 0.01em;
         }}
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Titel und Untertitel mit Emojis
+# Titel und Untertitel mit Emojis und zusätzlicher Erklärung
 st.markdown(
     f"""
     <h1 style="color:{DARK}; font-size:2.3em; margin-bottom:0.2em;">
         KI Erklärungs-Generator
     </h1>
     <div class="subtitle">Von 🛠️ Technisch zu 📸 Metaphorisch</div>
+    <div class="subtitle-2">Wähle einen KI-Fachbegriff und lasse dir eine technische und eine metaphorische Begriffsdefinition geben, viel Spaß!</div>
     """, unsafe_allow_html=True
 )
 
@@ -72,8 +79,8 @@ with col2:
         "Predictive Analytics",
         "Vektordatenbank",
         "Prompt Engineering",
-        "Natural Language Processing",
-        "Computer Vision"  # ersetzt Transfer Learning
+        "Chatbot",
+        "RAG (Retrieval Augmented Generation)"
     ]
     selected_dropdown = st.selectbox(
         "",
@@ -138,4 +145,3 @@ if trigger and begriff:
         )
 elif submit and not begriff:
     st.warning("Bitte gib einen Begriff ein.")
-
