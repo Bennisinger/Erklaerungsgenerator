@@ -20,7 +20,7 @@ if st.button("Erklären"):
                 technische_definition = "Keine technische Definition bei Wikipedia gefunden."
 
         with st.spinner("KI denkt sich eine Metapher aus..."):
-            prompt = f"""Erkläre den Begriff '{begriff}' mit einer einzigen, einprägsamen Metapher oder Analogie aus dem Alltag, die wirklich im Kopf bleibt. Nutze KEINE Umschreibungen und keine doppelte Vergleiche. Fasse dich auf maximal 2–3 Sätze, verwende eine einfache, anschauliche Alltagssituation oder einen Gegenstand, sodass jeder sofort ein Bild im Kopf hat. Kein Fachvokabular, kein Lehrbuchstil. Beispiel für einen guten Stil: 'Machine Learning ist wie das Training eines Hundes.'"""
+           prompt = f"""Erkläre den Begriff '{begriff}' ausschließlich mit einer einzigen, bildhaften Metapher aus dem Alltag. Wähle einen Gegenstand oder ein anschauliches System (z.B. Labyrinth, Maschine, Werkzeugkasten, Garten...), das den Ablauf oder die Funktionsweise des Begriffs spürbar und sichtbar macht. Beschreibe in maximal 3 Sätzen, wie in diesem Bild die Information verarbeitet wird oder was passiert. Verwende nur eine Metapher, keine abstrakten Vergleiche oder Umschreibungen. Es soll direkt ein Bild im Kopf entstehen – keine Fachbegriffe, kein Lehrbuchstil."""
             response = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
