@@ -49,14 +49,14 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Titel und Untertitel mit Emojis und zusätzlicher Erklärung
+# Titel und Untertitel mit Emojis und Erklärungstext
 st.markdown(
     f"""
     <h1 style="color:{DARK}; font-size:2.3em; margin-bottom:0.2em;">
         KI Erklärungs-Generator
     </h1>
     <div class="subtitle">Von 🛠️ Technisch zu 📸 Metaphorisch</div>
-    <div class="subtitle-2">Wähle einen KI-Fachbegriff und lasse dir eine technische und metaphorische Begriffsdefinition geben, alle Angaben sind wie immer ohne Gewähr.</div>
+    <div class="subtitle-2">Wähle einen KI-Fachbegriff und lasse dir eine technische und metaphorische Begriffsdefinition geben, viel Spaß!</div>
     """, unsafe_allow_html=True
 )
 
@@ -79,7 +79,8 @@ with col2:
         "Predictive Analytics",
         "Vektordatenbank",
         "Prompt Engineering",
-        "Chatbot"
+        "Chatbot",
+        "KI-Agent"
     ]
     selected_dropdown = st.selectbox(
         "",
@@ -144,3 +145,9 @@ if trigger and begriff:
         )
 elif submit and not begriff:
     st.warning("Bitte gib einen Begriff ein.")
+
+# --- Disclaimer ganz unten ---
+st.markdown(
+    "<div style='color:#767676; font-size:0.99em; margin-top: 34px; text-align:center;'>*Alle Angaben sind wie immer ohne Gewähr 👀*</div>",
+    unsafe_allow_html=True
+)
