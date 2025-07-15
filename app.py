@@ -5,8 +5,37 @@ from openai import OpenAI
 # API-Key für Deployment
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-st.set_page_config(page_title="Erklärungsgenerator", page_icon="💡")
-st.title("💡 Tech-Begriff erklärt: Wikipedia + KI-Metapher")
+# Farben
+BACKGROUND = "#F7D6B3"
+TECH_BOX = "#ECE6F3"
+META_BOX = "#FFF7E0"
+DARK = "#29223D"
+
+st.set_page_config(page_title="Erklärungs-Generator", page_icon="💡", layout="centered")
+
+# Setze Hintergrundfarbe mit CSS
+st.markdown(
+    f"""
+    <style>
+        body {{
+            background-color: {BACKGROUND} !important;
+        }}
+        .block-container {{
+            background-color: {BACKGROUND} !important;
+        }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Neuer Titel, ohne Emoji
+st.markdown(
+    f"""
+    <h1 style="color:{DARK}; font-size:2.3em; margin-bottom:0;">
+        Erklärungs-Generator: Aus Technisch wird Metaphorisch
+    </h1>
+    """, unsafe_allow_html=True
+)
 
 begriff = st.text_input("🔤 Begriff eingeben:")
 
@@ -30,13 +59,28 @@ if st.button("Erklären"):
             )
             alltagsmetapher = response.choices[0].message.content.strip()
 
-        # Zwei Spalten für die Ausgabe
+        st.markdown("---")
+
         col1, col2 = st.columns(2)
         with col1:
-            st.markdown("### 💡 Technische Definition (Wikipedia)")
-            st.info(technische_definition)
+            st.markdown(
+                f"""
+                <div style="background-color: {TECH_BOX}; border-radius: 18px; padding: 20px; margin-bottom: 12px; box-shadow: 0 2px 8px #b6e0fe55;">
+                <h3 style="margin-top:0; color:{DARK};">🛠️ Technische Definition (Wikipedia)</h3>
+                <div style="font-size: 1.1em; color:{DARK};">{technische_definition}</div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
         with col2:
-            st.markdown("### 🌈 Metapher/Analogie")
-            st.success(alltagsmetapher)
+            st.markdown(
+                f"""
+                <div style="background-color: {META_BOX}; border-radius: 18px; padding: 20px; margin-bottom: 12px; box-shadow: 0 2px 8px #dde9d1aa;">
+                <h3 style="margin-top:0; color:{DARK};">📸 Metaphorisch</h3>
+                <div style="font-size: 1.1em; color:{DARK};">{alltagsmetapher}</div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
     else:
         st.warning("Bitte gib einen Begriff ein.")
