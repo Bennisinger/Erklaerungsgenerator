@@ -7,7 +7,7 @@ client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # Farben
 BACKGROUND = "#F7D6B3"
-TECH_BOX = "#D7E8F7"       # Sanftes Blau – passt zu Tech, kann beliebig geändert werden!
+TECH_BOX = "#D7E8F7"
 META_BOX = "#FFF7E0"
 DARK = "#29223D"
 LIGHTGREY = "#8A8A8A"
@@ -36,13 +36,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Titel und Untertitel
+# Titel und Untertitel mit Emojis
 st.markdown(
     f"""
     <h1 style="color:{DARK}; font-size:2.3em; margin-bottom:0.2em;">
         KI Erklärungs-Generator
     </h1>
-    <div class="subtitle">Von technisch zu metaphorisch</div>
+    <div class="subtitle">Von 🛠️ Technisch zu 📸 Metaphorisch</div>
     """, unsafe_allow_html=True
 )
 
@@ -50,30 +50,40 @@ col_input, col_examples = st.columns([2, 2.1])
 
 with col_input:
     begriff = st.text_input("Begriff eingeben:", key="inputfeld")
+    submit = st.button("Erklär's mir", key="erklaer_button")
+
+# Testbegriffe (Sortierung und Ergänzung wie gewünscht)
+beispiele = [
+    "Large Language Model",
+    "Machine Learning",
+    "Deep Learning",
+    "Neuronales Netz",
+    "Artificial General Intelligence",
+    "Predictive Analytics",
+    "Vektordatenbank"
+]
 
 with col_examples:
     st.markdown("**Teste einen Begriff:**")
-    beispiele = [
-        "Vektordatenbank",
-        "Machine Learning",
-        "Deep Learning",
-        "Artificial General Intelligence"
-    ]
-    option = st.radio(
+    # Radio als Buttons (direkt untereinander)
+    selected = st.radio(
         "",
         beispiele,
         index=None,
         key="testbegriffe"
     )
-    if option and (not begriff or begriff != option):
-        begriff = option
-        st.session_state.inputfeld = option
 
-button_kol, _ = st.columns([1, 2.9])
-with button_kol:
-    submit = st.button("Erklär's mir")
+# Logik: Wenn Button gedrückt ODER Testbegriff ausgewählt
+# (und beide Felder unabhängig voneinander nutzbar)
+trigger = False
 
 if submit and begriff:
+    trigger = True
+elif selected:
+    begriff = selected
+    trigger = True
+
+if trigger and begriff:
     with st.spinner("Hole technische Definition von Wikipedia..."):
         wikipedia.set_lang("de")
         try:
@@ -118,6 +128,6 @@ if submit and begriff:
             """,
             unsafe_allow_html=True
         )
-elif submit:
+elif submit and not begriff:
     st.warning("Bitte gib einen Begriff ein.")
 
