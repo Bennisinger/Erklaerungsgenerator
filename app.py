@@ -45,32 +45,38 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-begriff = st.text_input("Begriff eingeben:", key="inputfeld")
-submit = st.button("Erklär's mir", key="erklaer_button")
+# --- Nebeneinander: Freie Eingabe und Dropdown ---
+col1, col2 = st.columns([1.1, 1.1])
 
-# --- Dropdown für Testbegriffe ---
-dropdown_begriffe = [
-    "Large Language Model",
-    "Machine Learning",
-    "Deep Learning",
-    "Neuronales Netz",
-    "Artificial General Intelligence",
-    "Predictive Analytics",
-    "Vektordatenbank",
-    "Prompt Engineering",
-    "Natural Language Processing",
-    "Transfer Learning"
-]
-st.markdown("**Teste einen Begriff:**")
-selected_dropdown = st.selectbox(
-    "KI-Fachbegriff auswählen:",
-    [""] + dropdown_begriffe,
-    index=0,
-    key="dropdown"
-)
+with col1:
+    st.markdown("**KI-Fachbegriff eingeben:**")
+    begriff = st.text_input("", key="inputfeld", label_visibility="collapsed")
+    submit = st.button("Erklär's mir", key="erklaer_button")
 
+with col2:
+    st.markdown("**KI-Fachbegriff auswählen:**")
+    dropdown_begriffe = [
+        "Large Language Model",
+        "Machine Learning",
+        "Deep Learning",
+        "Neuronales Netz",
+        "Artificial General Intelligence",
+        "Predictive Analytics",
+        "Vektordatenbank",
+        "Prompt Engineering",
+        "Natural Language Processing",
+        "Transfer Learning"
+    ]
+    selected_dropdown = st.selectbox(
+        "",
+        [""] + dropdown_begriffe,
+        index=0,
+        key="dropdown",
+        label_visibility="collapsed"
+    )
+
+# --- Logik ---
 trigger = False
-# Dropdown-Auswahl hat Vorrang
 if selected_dropdown:
     begriff = selected_dropdown
     trigger = True
@@ -98,8 +104,8 @@ if trigger and begriff:
 
     st.markdown("---")
 
-    col1, col2 = st.columns(2)
-    with col1:
+    c1, c2 = st.columns(2)
+    with c1:
         st.markdown(
             f"""
             <div style="background-color: {TECH_BOX}; border-radius: 18px; padding: 20px; margin-bottom: 12px; box-shadow: 0 2px 8px #b6e0fe55;">
@@ -112,7 +118,7 @@ if trigger and begriff:
             """,
             unsafe_allow_html=True
         )
-    with col2:
+    with c2:
         st.markdown(
             f"""
             <div style="background-color: {META_BOX}; border-radius: 18px; padding: 20px; margin-bottom: 12px; box-shadow: 0 2px 8px #dde9d1aa;">
@@ -124,4 +130,3 @@ if trigger and begriff:
         )
 elif submit and not begriff:
     st.warning("Bitte gib einen Begriff ein.")
-
