@@ -13,7 +13,10 @@ begriff = st.text_input("🔤 Begriff eingeben:")
 if st.button("Erklären"):
     if begriff:
         with st.spinner("Hole technische Definition von Wikipedia..."):
-            wiki_wiki = wikipediaapi.Wikipedia('de')
+            wiki_wiki = wikipediaapi.Wikipedia(
+                language='de',
+                headers={'User-Agent': 'Erklaerungsgenerator/1.0 (https://github.com/Bennisinger/Erklaerungsgenerator)'}
+            )
             page = wiki_wiki.page(begriff)
             if page.exists() and page.summary:
                 technische_definition = page.summary.split(".")[0] + "."
@@ -38,7 +41,3 @@ if st.button("Erklären"):
             st.info(technische_definition)
         with col2:
             st.markdown("### 🌈 Metapher/Analogie")
-            st.success(alltagsmetapher)
-    else:
-        st.warning("Bitte gib einen Begriff ein.")
-
