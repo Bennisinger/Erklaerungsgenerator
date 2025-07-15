@@ -30,20 +30,6 @@ st.markdown(
             margin-bottom: 18px;
             font-weight: 400;
         }}
-        .pill-btn > button {{
-            border-radius: 40px !important;
-            background: #fff !important;
-            border: 1px solid #ccc !important;
-            color: {DARK} !important;
-            margin-bottom: 7px !important;
-            font-weight: 500 !important;
-            transition: 0.2s;
-        }}
-        .pill-btn > button:hover {{
-            background: #E0D9F7 !important;
-            border: 1.5px solid {DARK} !important;
-            color: {DARK} !important;
-        }}
     </style>
     """,
     unsafe_allow_html=True
@@ -62,9 +48,8 @@ st.markdown(
 begriff = st.text_input("Begriff eingeben:", key="inputfeld")
 submit = st.button("Erklär's mir", key="erklaer_button")
 
-# --- Pill Buttons unter dem Inputfeld ---
-st.markdown("**Teste einen Begriff:**")
-pill_begriffe = [
+# --- Dropdown für Testbegriffe ---
+dropdown_begriffe = [
     "Large Language Model",
     "Machine Learning",
     "Deep Learning",
@@ -76,26 +61,20 @@ pill_begriffe = [
     "Natural Language Processing",
     "Transfer Learning"
 ]
-selected_pill = None
-# Erste Zeile, 5 Buttons
-cols1 = st.columns(5)
-for i, begriff_option in enumerate(pill_begriffe[:5]):
-    with cols1[i]:
-        if st.button(begriff_option, key=f"pill1_{begriff_option}", help="Klick für eine Beispiel-Erklärung", type="secondary"):
-            selected_pill = begriff_option
-# Zweite Zeile, 5 Buttons
-cols2 = st.columns(5)
-for i, begriff_option in enumerate(pill_begriffe[5:]):
-    with cols2[i]:
-        if st.button(begriff_option, key=f"pill2_{begriff_option}", help="Klick für eine Beispiel-Erklärung", type="secondary"):
-            selected_pill = begriff_option
+st.markdown("**Teste einen Begriff:**")
+selected_dropdown = st.selectbox(
+    "KI-Fachbegriff auswählen:",
+    [""] + dropdown_begriffe,
+    index=0,
+    key="dropdown"
+)
 
-# Trigger/Logik
 trigger = False
-if submit and begriff:
+# Dropdown-Auswahl hat Vorrang
+if selected_dropdown:
+    begriff = selected_dropdown
     trigger = True
-elif selected_pill:
-    begriff = selected_pill
+elif submit and begriff:
     trigger = True
 
 if trigger and begriff:
@@ -145,3 +124,4 @@ if trigger and begriff:
         )
 elif submit and not begriff:
     st.warning("Bitte gib einen Begriff ein.")
+
