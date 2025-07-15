@@ -30,6 +30,14 @@ st.markdown(
             margin-bottom: 18px;
             font-weight: 400;
         }}
+        .subfield {{
+            color: {DARK};
+            font-size: 1.08em;
+            font-weight: 400;
+            margin-top: 10px;
+            margin-bottom: 8px;
+            letter-spacing: 0.02em;
+        }}
     </style>
     """,
     unsafe_allow_html=True
@@ -49,12 +57,12 @@ st.markdown(
 col1, col2 = st.columns([1.1, 1.1])
 
 with col1:
-    st.markdown("**KI-Fachbegriff eingeben:**")
+    st.markdown('<div class="subfield">KI-Fachbegriff eingeben:</div>', unsafe_allow_html=True)
     begriff = st.text_input("", key="inputfeld", label_visibility="collapsed")
     submit = st.button("Erklär's mir", key="erklaer_button")
 
 with col2:
-    st.markdown("**KI-Fachbegriff auswählen:**")
+    st.markdown('<div class="subfield">KI-Fachbegriff auswählen:</div>', unsafe_allow_html=True)
     dropdown_begriffe = [
         "Large Language Model",
         "Machine Learning",
@@ -65,7 +73,7 @@ with col2:
         "Vektordatenbank",
         "Prompt Engineering",
         "Natural Language Processing",
-        "Transfer Learning"
+        "Computer Vision"  # ersetzt Transfer Learning
     ]
     selected_dropdown = st.selectbox(
         "",
@@ -130,3 +138,4 @@ if trigger and begriff:
         )
 elif submit and not begriff:
     st.warning("Bitte gib einen Begriff ein.")
+
