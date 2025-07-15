@@ -56,7 +56,7 @@ st.markdown(
         KI Erklärungs-Generator
     </h1>
     <div class="subtitle">Von 🛠️ Technisch zu 📸 Metaphorisch</div>
-    <div class="subtitle-2">Wähle einen KI-Fachbegriff und lasse dir eine technische und eine metaphorische Begriffsdefinition geben, viel Spaß!</div>
+    <div class="subtitle-2">Wähle einen KI-Fachbegriff und lasse dir eine technische und metaphorische Begriffsdefinition geben, alle Angaben sind wie immer ohne Gewähr.</div>
     """, unsafe_allow_html=True
 )
 
@@ -79,8 +79,7 @@ with col2:
         "Predictive Analytics",
         "Vektordatenbank",
         "Prompt Engineering",
-        "Chatbot",
-        "RAG (Retrieval Augmented Generation)"
+        "Chatbot"
     ]
     selected_dropdown = st.selectbox(
         "",
