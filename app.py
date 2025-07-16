@@ -2,10 +2,8 @@ import wikipedia
 import streamlit as st
 from openai import OpenAI
 
-# API-Key für Deployment
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-# Farben
 BACKGROUND = "#F7D6B3"
 TECH_BOX = "#D7E8F7"
 META_BOX = "#FFF7E0"
@@ -50,7 +48,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Titel, Metaphern-Zeile direkt darunter, dann Kurz-Erklärung
 st.markdown(
     f"""
     <h1 style="color:{DARK}; font-size:2.3em; margin-bottom:0.1em;">
@@ -61,7 +58,6 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-# --- Nebeneinander: Freie Eingabe und Dropdown ---
 col1, col2 = st.columns([1.1, 1.1])
 
 with col1:
@@ -74,7 +70,7 @@ with col2:
     dropdown_begriffe = [
         "Large Language Model",
         "Deep Learning",
-        "Generatives KI Modell",
+        "GenAI",
         "Neuronales Netz",
         "Hybride Intelligenz",
         "Artificial General Intelligence",
@@ -91,7 +87,6 @@ with col2:
         label_visibility="collapsed"
     )
 
-# --- Logik ---
 trigger = False
 if selected_dropdown:
     begriff = selected_dropdown
