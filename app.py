@@ -25,11 +25,17 @@ st.markdown(
         }}
         .subtitle {{
             color: {DARK};
-            font-size: 1.03em;
+            font-size: 1.08em;
             font-weight: 400;
             margin-top: 0px;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             letter-spacing: 0.01em;
+        }}
+        .subtitle-2 {{
+            color: {DARK};
+            font-size: 1.01em;
+            font-weight: 400;
+            margin-bottom: 22px;
         }}
         .subfield {{
             color: {DARK};
@@ -44,14 +50,14 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Titel und Untertitel direkt beieinander, einheitliche Größe
+# Titel, Metaphern-Zeile direkt darunter, dann Kurz-Erklärung
 st.markdown(
     f"""
-    <h1 style="color:{DARK}; font-size:2.3em; margin-bottom:0.05em;">
+    <h1 style="color:{DARK}; font-size:2.3em; margin-bottom:0.1em;">
         KI Erklärungs-Generator
     </h1>
-    <div class="subtitle" style="margin-bottom:2px;">Von 🛠️ Technisch zu 📸 Metaphorisch</div>
-    <div class="subtitle">Wähle einen KI-Fachbegriff und lasse dir eine technische und metaphorische Begriffsdefinition geben, viel Spaß!</div>
+    <div class="subtitle" style="margin-bottom:0.3em;">Von 🛠️ Technisch zu 📸 Metaphorisch</div>
+    <div class="subtitle-2">Wähle einen KI-Fachbegriff und lasse dir eine technische und metaphorische Begriffsdefinition geben, viel Spaß!</div>
     """, unsafe_allow_html=True
 )
 
@@ -67,13 +73,13 @@ with col2:
     st.markdown('<div class="subfield">KI-Fachbegriff auswählen:</div>', unsafe_allow_html=True)
     dropdown_begriffe = [
         "Large Language Model",
-        "Machine Learning",
         "Deep Learning",
+        "Generatives KI Modell",
         "Neuronales Netz",
+        "Hybride Intelligenz",
         "Artificial General Intelligence",
         "Predictive Analytics",
         "Vektordatenbank",
-        "Prompt Engineering",
         "Chatbot",
         "KI-Agent"
     ]
@@ -144,4 +150,3 @@ if trigger and begriff:
         )
 elif submit and not begriff:
     st.warning("Bitte gib einen Begriff ein.")
-
