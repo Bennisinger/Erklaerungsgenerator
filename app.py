@@ -25,16 +25,11 @@ st.markdown(
         }}
         .subtitle {{
             color: {DARK};
-            font-size: 1.15em;
-            margin-top: -8px;
+            font-size: 1.03em;
+            font-weight: 400;
+            margin-top: 0px;
             margin-bottom: 8px;
-            font-weight: 400;
-        }}
-        .subtitle-2 {{
-            color: {DARK};
-            font-size: 1.01em;
-            font-weight: 400;
-            margin-bottom: 22px;
+            letter-spacing: 0.01em;
         }}
         .subfield {{
             color: {DARK};
@@ -49,14 +44,14 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Titel und Untertitel mit Emojis und Erklärungstext
+# Titel und Untertitel direkt beieinander, einheitliche Größe
 st.markdown(
     f"""
-    <h1 style="color:{DARK}; font-size:2.3em; margin-bottom:0.2em;">
+    <h1 style="color:{DARK}; font-size:2.3em; margin-bottom:0.05em;">
         KI Erklärungs-Generator
     </h1>
-    <div class="subtitle">Von 🛠️ Technisch zu 📸 Metaphorisch</div>
-    <div class="subtitle-2">Wähle einen KI-Fachbegriff und lasse dir eine technische und metaphorische Begriffsdefinition geben, viel Spaß!</div>
+    <div class="subtitle" style="margin-bottom:2px;">Von 🛠️ Technisch zu 📸 Metaphorisch</div>
+    <div class="subtitle">Wähle einen KI-Fachbegriff und lasse dir eine technische und metaphorische Begriffsdefinition geben, viel Spaß!</div>
     """, unsafe_allow_html=True
 )
 
@@ -107,7 +102,11 @@ if trigger and begriff:
             technische_definition = "Keine technische Definition bei Wikipedia gefunden."
 
     with st.spinner("KI denkt sich eine Metapher aus..."):
-        prompt = f"""Erkläre den Begriff '{begriff}' ausschließlich mit einer einzigen, klaren Metapher oder Analogie aus dem Alltag. Wähle dafür einen echten, greifbaren Gegenstand oder Vorgang (wie Tetris, Post-it, Werkzeugkasten, Baukasten, Puzzle, Bibliothek, ...), KEINE abstrakten Begriffe oder Umschreibungen. Verwende nicht das Wort selbst oder Ableitungen davon in der Erklärung. In maximal 3 Sätzen soll sofort ein konkretes, überraschendes Bild im Kopf entstehen, das den Kern des Begriffs einfängt. Beispiel für Stil: 'Machine Learning ist wie das Training eines Hundes.'"""
+        prompt = (
+            f"Erkläre den Begriff '{begriff}' mit einer klaren, überraschenden Metapher oder Analogie aus dem Alltag. "
+            "Verwende maximal zwei kurze Sätze, ohne dich zu wiederholen oder allgemeine Floskeln zu verwenden. "
+            "Der Vergleich soll sofort ein konkretes Bild im Kopf erzeugen und einen echten Aha-Moment bieten."
+        )
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -146,8 +145,3 @@ if trigger and begriff:
 elif submit and not begriff:
     st.warning("Bitte gib einen Begriff ein.")
 
-# --- Disclaimer ganz unten ---
-st.markdown(
-    "<div style='color:#767676; font-size:0.99em; margin-top: 34px; text-align:center;'>*Alle Angaben sind wie immer ohne Gewähr 👀*</div>",
-    unsafe_allow_html=True
-)
