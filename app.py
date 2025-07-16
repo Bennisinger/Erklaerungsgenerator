@@ -70,7 +70,7 @@ with col2:
     dropdown_begriffe = [
         "Large Language Model",
         "Deep Learning",
-        "GenAI",
+        "Data-Mining",
         "Neuronales Netz",
         "Hybride Intelligenz",
         "Artificial General Intelligence",
