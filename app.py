@@ -32,7 +32,7 @@ st.markdown(
             font-size: 1.06em;
             font-weight: 400;
             margin-top: -0.3em;
-            margin-bottom: 0.2em;
+            margin-bottom: 2.0em;
             letter-spacing: 0.01em;
         }}
         .subtitle-2 {{
@@ -40,6 +40,7 @@ st.markdown(
             font-size: 1.01em;
             font-weight: 400;
             margin-bottom: 22px;
+            margin-top: 0.5em;
         }}
         .subfield {{
             color: {DARK};
