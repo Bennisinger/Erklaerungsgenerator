@@ -10,7 +10,7 @@ META_BOX = "#FFF7E0"
 DARK = "#29223D"
 LIGHTGREY = "#8A8A8A"
 
-st.set_page_config(page_title="KI Erklärungs-Generator", page_icon="💡", layout="centered")
+st.set_page_config(page_title="Metaphern-Generator für KI-Begriffe", page_icon="💡", layout="centered")
 
 st.markdown(
     f"""
@@ -21,17 +21,14 @@ st.markdown(
         .block-container {{
             background-color: {BACKGROUND} !important;
         }}
-        .subtitle {{
+        .title {{
             color: {DARK};
-            font-size: 1.08em;
-            font-weight: 400;
-            margin-top: 0px;
-            margin-bottom: 5px;
-            letter-spacing: 0.01em;
+            font-size: 2.3em;
+            margin-bottom: 0.15em;
         }}
         .subtitle-2 {{
             color: {DARK};
-            font-size: 1.01em;
+            font-size: 1.05em;
             font-weight: 400;
             margin-bottom: 22px;
         }}
@@ -50,12 +47,10 @@ st.markdown(
 
 st.markdown(
     f"""
-    <h1 style="color:{DARK}; font-size:2.3em; margin-bottom:0.1em;">
-        KI Erklärungs-Generator
-    </h1>
-    <div class="subtitle" style="margin-bottom:0.3em;">Von 🛠️ Technisch zu 📸 Metaphorisch</div>
-    <div class="subtitle-2">Wähle einen KI-Fachbegriff und lasse dir eine technische und metaphorische Begriffsdefinition geben, viel Spaß!</div>
-    """, unsafe_allow_html=True
+    <h1 class="title">Metaphern-Generator für KI-Begriffe</h1>
+    <div class="subtitle-2">Wähle einen KI-Fachbegriff und lasse dir je eine technische und metaphorische Begriffsdefinition geben, viel Spaß!</div>
+    """,
+    unsafe_allow_html=True
 )
 
 col1, col2 = st.columns([1.1, 1.1])
